@@ -1,0 +1,39 @@
+A really silly question: did you name your script file xml.py? If so, DON'T DO THAT ... import xml.anything will be looking in your script file! It's never a good idea to give a script file the same name as a module that you are going to import.
+
+Update Tracebacks are your friends. Lead to read them carefully. If you don't know how to read them, include the traceback in your question.
+
+I'm betting that yours will look very similar to this:
+
+Traceback (most recent call last):
+  File "xml.py", line 4, in <module>
+    import xml.etree.ElementTree as et
+  File "C:\junk\xml.py", line 4, in <module> #### here's the culprit ####
+    import xml.etree.ElementTree as et
+ImportError: No module named etree.ElementTree
+
+Otherwise:
+
+Set up a script containing only the following lines:
+
+import sys
+print sys.version
+print sys.path
+import xml.etree.ElementTree as et
+print et.__file__
+import xml.etree.ElementTree as xml
+print xml.__file__
+
+run it, and show all the output ... copy/paste into an edit of your question.
+
+Repeat the following interpreter session on your computer, and report what is printed:
+
+C:\junk>\python26\python
+Python 2.6.6 (r266:84297, Aug 24 2010, 18:46:32) [MSC v.1500 32 bit (Intel)] on
+win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import xml.etree.ElementTree as et
+>>> print et.__file__
+C:\python26\lib\xml\etree\ElementTree.pyc
+>>>
+
+ 
